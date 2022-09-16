@@ -69,7 +69,7 @@ jobs:
           --verbose
           --output runtime
           --module-path "${JAVA_HOME}/jmods"
-          --add-modules java.base,java.desktop,java.logging,java.naming,java.net.http,java.scripting,java.sql,java.xml,jdk.unsupported,jdk.crypto.ec,jdk.accessibility,jdk.management.jfr
+          --add-modules java.base,java.desktop,java.instrument,java.logging,java.naming,java.net.http,java.scripting,java.sql,java.xml,jdk.unsupported,jdk.crypto.ec,jdk.accessibility,jdk.management.jfr
           --strip-native-commands
           --no-header-files
           --no-man-pages
@@ -96,6 +96,7 @@ jobs:
           --java-options "-Dcryptomator.logDir=\"~/AppData/Roaming/Cryptomator\""
           --java-options "-Dcryptomator.pluginDir=\"~/AppData/Roaming/Cryptomator/Plugins\""
           --java-options "-Dcryptomator.settingsPath=\"~/AppData/Roaming/Cryptomator/settings.json\""
+          --java-options "-Dcryptomator.p12Path=\"~/AppData/Roaming/Cryptomator/key.p12\""
           --java-options "-Dcryptomator.ipcSocketPath=\"~/AppData/Roaming/Cryptomator/ipc.socket\""
           --java-options "-Dcryptomator.mountPointsDir=\"~/Cryptomator\""
           --java-options "-Dcryptomator.showTrayIcon=true"
@@ -197,13 +198,13 @@ jobs:
     name: Publish on winget repo
     runs-on: windows-latest
     needs: [build-msi]
-    if: github.event.action == 'release' || inputs.winget-release
+    if: github.event.action == 'published' || inputs.winget-release
     steps:
       - name: Submit package to Windows Package Manager Community Repository
         run: |
           iwr https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
           $github = Get-Content '${{ github.event_path }}' | ConvertFrom-Json
-          $installerUrl = $github.release.assets | Where-Object -Property name -match 'Cryptomator-*.msi' | Select -ExpandProperty browser_download_url -First 1
+          $installerUrl = $github.release.assets | Where-Object -Property name -match '^Cryptomator-.*\.msi' | Select -ExpandProperty browser_download_url -First 1
           .\wingetcreate.exe update Cryptomator.Cryptomator -s -v $github.release.tag_name -u $installerUrl -t ${{ secrets.CRYPTOBOT_WINGET_TOKEN }}
         shell: pwsh
 
