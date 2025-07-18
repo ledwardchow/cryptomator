@@ -42,13 +42,13 @@
 		<cryptomator.webdav.version>2.0.6</cryptomator.webdav.version>
 
 		<!-- 3rd party dependencies -->
-		<commons-lang3.version>3.16.0</commons-lang3.version>
+		<commons-lang3.version>3.18.0</commons-lang3.version>
 		<dagger.version>2.52</dagger.version>
 		<easybind.version>2.2</easybind.version>
 		<jackson.version>2.17.2</jackson.version>
 		<javafx.version>22.0.2</javafx.version>
 		<jwt.version>4.4.0</jwt.version>
-		<nimbus-jose.version>9.37.3</nimbus-jose.version>
+		<nimbus-jose.version>10.0.2</nimbus-jose.version>
 		<logback.version>1.5.7</logback.version>
 		<slf4j.version>2.0.16</slf4j.version>
 		<tinyoauth2.version>0.8.0</tinyoauth2.version>
@@ -334,8 +334,7 @@
 					<consoleOutputReporter>
 						<disable>true</disable>
 					</consoleOutputReporter>
-					<statelessTestsetInfoReporter
-							implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+					<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
 					</statelessTestsetInfoReporter>
 				</configuration>
 			</plugin>
