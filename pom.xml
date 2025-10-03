@@ -49,7 +49,7 @@
 		<javafx.version>24.0.1</javafx.version>
 		<jwt.version>4.5.0</jwt.version>
 		<nimbus-jose.version>9.37.3</nimbus-jose.version>
-		<logback.version>1.5.18</logback.version>
+		<logback.version>1.5.19</logback.version>
 		<slf4j.version>2.0.17</slf4j.version>
 		<tinyoauth2.version>0.8.1</tinyoauth2.version>
 		<zxcvbn.version>1.9.0</zxcvbn.version>
@@ -72,7 +72,7 @@
 		<mvn-jar.version>3.4.2</mvn-jar.version>
 
 		<!-- Property used by surefire to determine jacoco engine -->
-		<surefire.jacoco.args></surefire.jacoco.args>
+		<surefire.jacoco.args/>
 	</properties>
 
 	<dependencies>
@@ -348,8 +348,7 @@
 						<disable>true</disable>
 					</consoleOutputReporter>
 					<argLine>@{surefire.jacoco.args} -javaagent:${org.mockito:mockito-core:jar} --enable-native-access=javafx.graphics</argLine>
-					<statelessTestsetInfoReporter
-							implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+					<statelessTestsetInfoReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
 					</statelessTestsetInfoReporter>
 				</configuration>
 			</plugin>
